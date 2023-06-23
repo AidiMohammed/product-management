@@ -142,7 +142,7 @@ class ProductController extends Controller
         else
             $field = strtolower($request->input('selectField'));
 
-        $products = Product::orderby($field,$order)->paginate($request->input('perPage'));
+        $products = Product::where('user_id',$request->user()->id)->orderby($field,$order)->paginate($request->input('perPage'));
 
         return ProductResource::collection($products);
         
